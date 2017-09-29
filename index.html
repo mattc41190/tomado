@@ -24,7 +24,7 @@
     <br>
     <div class="row">
       <div class="col" style="text-align:center;">
-        <p id='timer'>Timer goes here</p>
+        <h2 id='timer'></h2>
       </div>
     </div>
   </div>
@@ -36,6 +36,7 @@
   var pomoBtn = document.getElementById('pomoBtn');
   var shortBtn = document.getElementById('shortBtn');
   var longBtn = document.getElementById('longBtn');
+  var interval;
 
   function addMinutes(date, minutes) {
     return new Date(date.getTime() + minutes * 60000);
@@ -50,18 +51,30 @@
   function createTimer(minutes) {
       var startTime = new Date();
       var endTime = addMinutes(startTime, minutes);
-      setInterval(() => {
+      interval = setInterval(() => {
         timer.innerHTML = millisToMinutesAndSeconds(endTime - new Date());
       },1000)
   }
 
   pomoBtn.addEventListener('click', (e) => {
+      if (interval) {
+          clearInterval(interval);
+          interval = null;
+      }
       createTimer(25);
   });
   shortBtn.addEventListener('click', (e) => {
+      if (interval) {
+          clearInterval(interval);
+          interval = null;
+      }
       createTimer(5);
   });
   longBtn.addEventListener('click', (e) => {
+      if (interval) {
+          clearInterval(interval);
+          interval = null;
+      }
       createTimer(10);
   });
 
