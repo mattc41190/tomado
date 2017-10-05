@@ -1,0 +1,35 @@
+body {
+    font-family: 'Varela Round', sans-serif;
+    -webkit-app-region: drag;
+    background-color: #ED4337;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.container{
+
+}
+
+.title {
+    text-align: center;
+    padding: 20px;
+}
+
+button {
+    border: 10px solid white;
+    color: white;
+    border-radius: 100px;
+    padding: 20px 32px;
+    margin-top: 90px;
+    text-align: center;
+    font-size: 1px;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    width: 80%;
+}
+
+.work-btn {
+    background-color: #35B084;
+}
