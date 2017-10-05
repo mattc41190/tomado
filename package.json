@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run clean && electron-packager . Tomado && cp app/assets/images/tomato.icns Tomado-darwin-x64/Tomado.app/Contents/Resources/electron.icns",
+    "build": "webpack && npm run clean && electron-packager . Tomado && cp app/assets/images/tomato.icns Tomado-darwin-x64/Tomado.app/Contents/Resources/electron.icns",
     "dev": "webpack && electron .",
     "clean": "rm -rf Tomado-darwin-x64"
   },
