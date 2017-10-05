@@ -7,10 +7,8 @@ let win
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-    //   resizable: false,
-    //   frame: false,
-    titleBarStyle: 'hiddenInset',
-    //   titleBarStyle: 'customButtonsOnHover',
+      icon: path.join(__dirname, 'app/assets/images/tomato5.png'),
+      titleBarStyle: 'hiddenInset',
       width: 400,
       height: 600})
 

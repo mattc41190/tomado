@@ -1,16 +1,19 @@
 {
   "name": "tomado",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple pomodoro timer",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "electron ."
+    "build": "npm run clean && electron-packager . Tomado && cp app/assets/images/tomato.icns Tomado-darwin-x64/Tomado.app/Contents/Resources/electron.icns",
+    "dev": "electron .",
+    "clean" :  "rm -rf Tomado-darwin-x64"
   },
   "keywords": [],
-  "author": "",
+  "author": "Matthew Cale",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "electron-packager": "^9.1.0",
     "electron": "^1.7.8"
   }
 }
