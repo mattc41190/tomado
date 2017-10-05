@@ -6,14 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run clean && electron-packager . Tomado && cp app/assets/images/tomato.icns Tomado-darwin-x64/Tomado.app/Contents/Resources/electron.icns",
-    "dev": "electron .",
-    "clean" :  "rm -rf Tomado-darwin-x64"
+    "dev": "webpack && electron .",
+    "clean": "rm -rf Tomado-darwin-x64"
   },
   "keywords": [],
   "author": "Matthew Cale",
   "license": "ISC",
   "devDependencies": {
+    "electron": "^1.7.8",
     "electron-packager": "^9.1.0",
-    "electron": "^1.7.8"
+    "webpack": "^3.6.0"
   }
 }
