@@ -68,7 +68,7 @@
 /***/ (function(module, exports) {
 
 function addMinutes(date, minutes) {
-	return new Date(date.getTime() + minutes * 60000);
+	return new Date(date.getTime() + minutes * 100);
 }
 
 function millisToMinutesAndSeconds(millis) {
@@ -89,12 +89,14 @@ module.exports = {
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(__dirname) {const millisToMinutesAndSeconds = __webpack_require__(0).millisToMinutesAndSeconds
+console.log(__dirname);
+
+const millisToMinutesAndSeconds = __webpack_require__(0).millisToMinutesAndSeconds
 const addMinutes = __webpack_require__(0).addMinutes
 const timer = document.getElementById('timer');
 const pomoBtn = document.getElementById('pomoBtn');
 const soundName = 'alarm'
-const sound = new Audio(__dirname + '/assets/sounds/' + soundName + '.mp3');
+const sound = new Audio(`${__dirname}/assets/sounds/${soundName}.mp3`);
 let interval;
 
 function createTimer(minutes) {
@@ -119,7 +121,6 @@ pomoBtn.addEventListener('click', (e) => {
 	createTimer(25);
 });
 
-/* WEBPACK VAR INJECTION */}.call(exports, "/"))
 
 /***/ })
 /******/ ]);

@@ -1,9 +1,11 @@
+console.log(__dirname);
+
 const millisToMinutesAndSeconds = require('./api.js').millisToMinutesAndSeconds
 const addMinutes = require('./api.js').addMinutes
 const timer = document.getElementById('timer');
 const pomoBtn = document.getElementById('pomoBtn');
 const soundName = 'alarm'
-const sound = new Audio(__dirname + '/assets/sounds/' + soundName + '.mp3');
+const sound = new Audio(`${__dirname}/assets/sounds/${soundName}.mp3`);
 let interval;
 
 function createTimer(minutes) {
