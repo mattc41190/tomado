@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Tomado</title>
@@ -9,11 +10,19 @@
 
 <body>
   <div class="container">
-      <div class="workspace">
-          <button id="pomoBtn" class="work-btn" type="button" name="Work">Work</button>
-          <h1 id='timer'></h1>
-      </div>
+    <div class="workspace">
+      <h1 id='timer'>Tomado</h1>
+    </div>
+    <div class='control-panel'>
+        <div class='control-btn-container'>
+            <button value="25" id="leftBtn" class="control-btn" type="button" name="Left">Work</button>
+        </div>
+        <div class='control-btn-container'>
+            <button value="10" id="rightBtn" class="control-btn" type="button" name="Right">Break</button>
+        </div>
+    </div>
   </div>
 </body>
 <script src="scripts/bundle.js" charset="utf-8"></script>
+
 </html>

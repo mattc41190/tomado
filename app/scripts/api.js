@@ -1,16 +1,36 @@
-function addMinutes(date, minutes) {
-	return new Date(date.getTime() + minutes * 60000);
+function convertMinuteToSecond(minutes){
+	return minutes * 60;
 }
 
-function millisToMinutesAndSeconds(millis) {
-	var minutes = Math.floor(millis / 60000);
-	var seconds = ((millis % 60000) / 1000).toFixed(0);
-	return minutes + ":" + (seconds < 10
-		? '0'
-		: '') + seconds;
+function getMinute(seconds){
+	return Math.floor(seconds / 60);
+}
+
+function getSecond(seconds){
+	return Math.floor(seconds % 60);
+}
+
+function minutesAndSecondsToDecimal(minutes, seconds){
+	return parseFloat(minutes) + parseFloat(seconds / 60);
+}
+
+function formatTime(time){
+	let minute = getMinute(time);
+	let second = getSecond(time) >= 10 ? getSecond(time) : '0' + getSecond(time);
+	return minute + ':' + second;
+}
+
+function unformatTime(minuteString){
+	console.log('in unformatTime');
+	let splitTime = minuteString.split(':');
+	return minutesAndSecondsToDecimal(splitTime[0], splitTime[1]);
+
 }
 
 module.exports = {
-    addMinutes,
-    millisToMinutesAndSeconds
+	convertMinuteToSecond,
+	getMinute,
+	getSecond,
+	formatTime,
+	unformatTime
 };

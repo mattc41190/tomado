@@ -4,17 +4,28 @@
   "description": "A simple pomodoro timer",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha --opts .mocha",
     "build": "webpack && npm run clean && electron-packager . Tomado && cp app/assets/images/tomato.icns Tomado-darwin-x64/Tomado.app/Contents/Resources/electron.icns",
     "dev": "webpack && electron .",
-    "clean": "rm -rf Tomado-darwin-x64"
+    "clean": "rm -rf Tomado-darwin-x64",
+    "eslint": "eslint *.js"
   },
   "keywords": [],
   "author": "Matthew Cale",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "babel-register": "^6.26.0",
+    "chai": "^4.1.2",
     "electron": "^1.7.8",
     "electron-packager": "^9.1.0",
+    "eslint": "^4.8.0",
+    "mocha": "^4.0.0",
     "webpack": "^3.6.0"
   }
 }

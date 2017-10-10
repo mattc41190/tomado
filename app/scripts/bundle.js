@@ -60,67 +60,184 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function addMinutes(date, minutes) {
-	return new Date(date.getTime() + minutes * 100);
+"use strict";
+
+
+var _api = __webpack_require__(1);
+
+var timer = document.getElementById('timer');
+var leftBtn = document.getElementById('leftBtn');
+var rightBtn = document.getElementById('rightBtn');
+var soundName = 'alarm';
+var sound = new Audio(__dirname + '/assets/sounds/' + soundName + '.mp3');
+var WORKING = 'WORKING';
+var PAUSED = 'PAUSED';
+var IDLE = 'IDLE';
+
+var interval = void 0;
+var state = IDLE;
+
+function applyState(state) {
+	setLeftButtonState(state);
+	setRightButtonState(state);
 }
 
-function millisToMinutesAndSeconds(millis) {
-	var minutes = Math.floor(millis / 60000);
-	var seconds = ((millis % 60000) / 1000).toFixed(0);
-	return minutes + ":" + (seconds < 10
-		? '0'
-		: '') + seconds;
+function setLeftButtonState(state) {
+	if (state === WORKING) {
+		leftBtn.onclick = timerPause;
+	} else if (state === PAUSED) {
+		leftBtn.onclick = timerResume;
+	} else {
+		leftBtn.onclick = timerStart.bind(leftBtn);
+	}
 }
 
-module.exports = {
-    addMinutes,
-    millisToMinutesAndSeconds
-};
+function setRightButtonState(state) {
+	if (state === WORKING) {
+		rightBtn.onclick = timerReset;
+	} else if (state === PAUSED) {
+		rightBtn.onclick = timerReset;
+	} else {
+		rightBtn.onclick = timerStart.bind(rightBtn);
+	}
+}
 
+function timerStart() {
+	state = WORKING;
+	leftBtn.innerHTML = "Pause";
+	rightBtn.innerHTML = "Reset";
+	createTimer(this.value);
+	applyState(state);
+}
+
+function timerPause(e) {
+	state = PAUSED;
+	pause();
+	leftBtn.innerHTML = "Resume";
+	applyState(state);
+}
+
+function timerResume(e) {
+	state = WORKING;
+	resume();
+	leftBtn.innerHTML = "Pause";
+	applyState(state);
+}
+
+function timerReset(e) {
+	state = IDLE;
+	reset();
+	applyState(state);
+}
+
+function setText(event, text) {
+	event.target.innerHTML = text;
+}
+
+function resetInterval() {
+	if (interval) {
+		clearInterval(interval);
+		interval = null;
+	}
+}
+
+function reset() {
+	resetInterval();
+	leftBtn.innerHTML = "Work";
+	rightBtn.innerHTML = "Break";
+	setUITimer('Tomado');
+}
+
+function setUITimer(formattedTime) {
+	timer.innerHTML = formattedTime;
+}
+function getRemainingTime() {
+	return timer.innerHTML;
+}
+
+function pause() {
+	console.log("HERE");
+	var timeToDisplay = getRemainingTime();
+	console.log('timeToDisplay ' + timeToDisplay);
+	clearInterval(interval);
+	timer.innerHTML = timeToDisplay;
+}
+
+function resume() {
+	console.log('inside resume');
+	createTimer((0, _api.unformatTime)(getRemainingTime()));
+}
+
+function createTimer(minutes) {
+	console.log('inside createTimer with value ' + minutes);
+	resetInterval();
+	var startTime = (0, _api.convertMinuteToSecond)(minutes);
+	var endTime = 0;
+	var difference = startTime - endTime;
+	setUITimer((0, _api.formatTime)(difference));
+	interval = setInterval(function () {
+		startTime--;
+		difference = startTime - endTime;
+		setUITimer((0, _api.formatTime)(difference));
+		if (difference === 0) {
+			clearInterval(interval);
+			sound.play();
+			return;
+		}
+	}, 1000);
+}
+
+applyState(state);
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-console.log(__dirname);
+"use strict";
 
-const millisToMinutesAndSeconds = __webpack_require__(0).millisToMinutesAndSeconds
-const addMinutes = __webpack_require__(0).addMinutes
-const timer = document.getElementById('timer');
-const pomoBtn = document.getElementById('pomoBtn');
-const soundName = 'alarm'
-const sound = new Audio(`${__dirname}/assets/sounds/${soundName}.mp3`);
-let interval;
 
-function createTimer(minutes) {
-	let startTime = new Date();
-	let endTime = addMinutes(startTime, minutes);
-	interval = setInterval(() => {
-		if (endTime - new Date() < 0) {
-			clearInterval(interval);
-			interval = null;
-			sound.play();
-			return;
-		}
-		timer.innerHTML = millisToMinutesAndSeconds(endTime - new Date());
-	}, 1000)
+function convertMinuteToSecond(minutes) {
+	return minutes * 60;
 }
 
-pomoBtn.addEventListener('click', (e) => {
-	if (interval) {
-		clearInterval(interval);
-		interval = null;
-	}
-	createTimer(25);
-});
+function getMinute(seconds) {
+	return Math.floor(seconds / 60);
+}
 
+function getSecond(seconds) {
+	return Math.floor(seconds % 60);
+}
+
+function minutesAndSecondsToDecimal(minutes, seconds) {
+	return parseFloat(minutes) + parseFloat(seconds / 60);
+}
+
+function formatTime(time) {
+	var minute = getMinute(time);
+	var second = getSecond(time) >= 10 ? getSecond(time) : '0' + getSecond(time);
+	return minute + ':' + second;
+}
+
+function unformatTime(minuteString) {
+	console.log('in unformatTime');
+	var splitTime = minuteString.split(':');
+	return minutesAndSecondsToDecimal(splitTime[0], splitTime[1]);
+}
+
+module.exports = {
+	convertMinuteToSecond: convertMinuteToSecond,
+	getMinute: getMinute,
+	getSecond: getSecond,
+	formatTime: formatTime,
+	unformatTime: unformatTime
+};
 
 /***/ })
 /******/ ]);
