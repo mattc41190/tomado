@@ -8,11 +8,11 @@ body {
 }
 
 .workspace {
-    padding-top: 15%;
+    padding-top: 20%;
 }
 
-.workspace > h1 {
-    font-size: 100px;
+#timer {
+  font-size: 100px;
 }
 
 .control-panel {
