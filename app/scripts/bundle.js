@@ -73,8 +73,8 @@
 var _api = __webpack_require__(1);
 
 var timer = document.getElementById('timer');
-var leftBtn = document.getElementById('leftBtn');
-var rightBtn = document.getElementById('rightBtn');
+var leftBtn = document.getElementById('left-btn');
+var rightBtn = document.getElementById('right-btn');
 var soundName = 'alarm';
 var sound = new Audio(__dirname + '/assets/sounds/' + soundName + '.mp3');
 var WORKING = 'WORKING';
@@ -111,8 +111,8 @@ function setRightButtonState(state) {
 
 function timerStart() {
 	state = WORKING;
-	leftBtn.innerHTML = "Pause";
-	rightBtn.innerHTML = "Reset";
+	leftBtn.innerHTML = 'Pause';
+	rightBtn.innerHTML = 'Reset';
 	createTimer(this.value);
 	applyState(state);
 }
@@ -120,14 +120,14 @@ function timerStart() {
 function timerPause(e) {
 	state = PAUSED;
 	pause();
-	leftBtn.innerHTML = "Resume";
+	leftBtn.innerHTML = 'Resume';
 	applyState(state);
 }
 
 function timerResume(e) {
 	state = WORKING;
 	resume();
-	leftBtn.innerHTML = "Pause";
+	leftBtn.innerHTML = 'Pause';
 	applyState(state);
 }
 
@@ -150,8 +150,8 @@ function resetInterval() {
 
 function reset() {
 	resetInterval();
-	leftBtn.innerHTML = "Work";
-	rightBtn.innerHTML = "Break";
+	leftBtn.innerHTML = 'Work';
+	rightBtn.innerHTML = 'Break';
 	setUITimer('Tomado');
 }
 
@@ -163,22 +163,18 @@ function getRemainingTime() {
 }
 
 function pause() {
-	console.log("HERE");
 	var timeToDisplay = getRemainingTime();
-	console.log('timeToDisplay ' + timeToDisplay);
 	clearInterval(interval);
 	timer.innerHTML = timeToDisplay;
 }
 
 function resume() {
-	console.log('inside resume');
 	createTimer((0, _api.unformatTime)(getRemainingTime()));
 }
 
 function createTimer(minutes) {
-	console.log('inside createTimer with value ' + minutes);
 	resetInterval();
-	var startTime = (0, _api.convertMinuteToSecond)(minutes);
+	var startTime = (0, _api.convertMinutesToSeconds)(minutes);
 	var endTime = 0;
 	var difference = startTime - endTime;
 	setUITimer((0, _api.formatTime)(difference));
@@ -203,15 +199,16 @@ applyState(state);
 "use strict";
 
 
-function convertMinuteToSecond(minutes) {
+function convertMinutesToSeconds(minutes) {
 	return minutes * 60;
 }
 
-function getMinute(seconds) {
+function _getMinutes(seconds) {
 	return Math.floor(seconds / 60);
 }
 
-function getSecond(seconds) {
+// Get remaining seconds
+function _getSeconds(seconds) {
 	return Math.floor(seconds % 60);
 }
 
@@ -219,22 +216,22 @@ function minutesAndSecondsToDecimal(minutes, seconds) {
 	return parseFloat(minutes) + parseFloat(seconds / 60);
 }
 
-function formatTime(time) {
-	var minute = getMinute(time);
-	var second = getSecond(time) >= 10 ? getSecond(time) : '0' + getSecond(time);
+function formatTime(seconds) {
+	var minute = _getMinutes(seconds);
+	// if there are less than 10 seconds left prepend a "0" to the value
+	var second = _getSeconds(seconds) >= 10 ? _getSeconds(seconds) : '0' + _getSeconds(seconds);
 	return minute + ':' + second;
 }
 
-function unformatTime(minuteString) {
-	console.log('in unformatTime');
-	var splitTime = minuteString.split(':');
+function unformatTime(formattedTime) {
+	var splitTime = formattedTime.split(':');
 	return minutesAndSecondsToDecimal(splitTime[0], splitTime[1]);
 }
 
 module.exports = {
-	convertMinuteToSecond: convertMinuteToSecond,
-	getMinute: getMinute,
-	getSecond: getSecond,
+	convertMinutesToSeconds: convertMinutesToSeconds,
+	_getMinutes: _getMinutes,
+	_getSeconds: _getSeconds,
 	formatTime: formatTime,
 	unformatTime: unformatTime
 };
