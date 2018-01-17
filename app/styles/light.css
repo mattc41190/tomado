@@ -1,0 +1,47 @@
+body {
+    text-align: center;
+    font-family: 'Courgette', cursive;
+    color: #faf7f3;
+    -webkit-app-region: drag;
+    margin: 0;
+    background-color: #5b9aff;
+}
+
+.workspace {
+    padding-top: 20%;
+}
+
+#timer {
+  font-size: 100px;
+}
+
+.control-panel {
+    position: fixed;
+    height: 30%;
+    bottom: 0;
+    width: 100%;
+}
+
+.control-btn-container {
+    width: 49%;
+    display: inline-block;
+    text-align: center;
+}
+
+.control-btn {
+    font-family: 'Courgette', cursive;
+    outline: 0;
+    background-color: #3f6cb5;
+    border: 2px solid #faf7f3;
+    color: #faf7f3;
+    border-radius: 90px;
+    padding: 10px 10px;
+    height: 140px;
+    width: 140px;
+    font-size: 35px;
+    text-decoration: none;
+}
+
+button:hover {
+    background-color: #355ea0;
+}

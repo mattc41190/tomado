@@ -1,18 +1,10 @@
 body {
-    font-family: 'Courgette', cursive;
-    text-align: center;
-    -webkit-app-region: drag;
-    margin: 0;
-}
-
-/*
-body {
     text-align: center;
     font-family: 'Courgette', cursive;
     color: #faf7f3;
     -webkit-app-region: drag;
     margin: 0;
-    background-color: #e85045;
+    background-color: #3e4147;
 }
 
 .workspace {
@@ -39,7 +31,7 @@ body {
 .control-btn {
     font-family: 'Courgette', cursive;
     outline: 0;
-    background-color: #15b278;
+    background-color: #202328;
     border: 2px solid #faf7f3;
     color: #faf7f3;
     border-radius: 90px;
@@ -51,5 +43,5 @@ body {
 }
 
 button:hover {
-    background-color: #0ba36b;
-} */
+    background-color: #0f1116;
+}

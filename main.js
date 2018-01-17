@@ -13,12 +13,12 @@ function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
       icon: path.join(__dirname, 'app/assets/images/tomato5.png'),
-      backgroundColor: '#2e2c29',
+      backgroundColor: '#faf7f3',
       titleBarStyle: 'hiddenInset',
       width: 400,
       height: 600,
-      minWidth: 200,
-      minHeight: 200})
+      minWidth: 350,
+      minHeight: 480})
 
   // and load the index.html of the app.
   win.loadURL(url.format({
