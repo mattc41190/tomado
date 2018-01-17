@@ -1,16 +1,24 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Menu} = require('electron')
 const path = require('path')
-const url = require('url')
+const url = require('url');
+const menuTemplate = require('./menu-template.js');
+const menu = Menu.buildFromTemplate(menuTemplate)
 
 let win
 
 function createWindow () {
+  // Create Menus
+  Menu.setApplicationMenu.call(this, menu)
+
   // Create the browser window.
   win = new BrowserWindow({
       icon: path.join(__dirname, 'app/assets/images/tomato5.png'),
+      backgroundColor: '#2e2c29',
       titleBarStyle: 'hiddenInset',
       width: 400,
-      height: 600})
+      height: 600,
+      minWidth: 200,
+      minHeight: 200})
 
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -26,8 +34,6 @@ function createWindow () {
     win = null
   })
 }
-
-
 app.on('ready', createWindow)
 
 app.on('window-all-closed', () => {

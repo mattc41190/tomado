@@ -1,4 +1,12 @@
 body {
+    font-family: 'Courgette', cursive;
+    text-align: center;
+    -webkit-app-region: drag;
+    margin: 0;
+}
+
+/*
+body {
     text-align: center;
     font-family: 'Courgette', cursive;
     color: #faf7f3;
@@ -44,4 +52,4 @@ body {
 
 button:hover {
     background-color: #0ba36b;
-}
+} */
